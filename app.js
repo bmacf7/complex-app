@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
 const app = express();
+
+import router from "./router.js";
 
 app.use("/public", express.static("public"));
 app.set("views", "views");
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("home-guest");
-});
+app.use("/", router);
 
 app.listen(3000);

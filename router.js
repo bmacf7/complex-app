@@ -1,12 +1,9 @@
 import { Router } from "express";
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.render("home-guest");
-});
+import { home, register } from "./controllers/userController.js";
 
-router.get("/about", (req, res) => {
-  res.send("About Page");
-});
+router.get("/", home);
+router.post("/register", register);
 
 export default router;

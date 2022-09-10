@@ -19,7 +19,7 @@ app.set("view engine", "ejs");
 app.use("/", router);
 
 client.connect().then(() => {
-  app.listen(3000);
+  app.listen(process.env.DEV_PORT);
 });
 
 export { app, client };

@@ -11,3 +11,11 @@ export const register = (req, res) => {
     ? res.send(user.errors)
     : res.send("Congrats, there are no errors!");
 };
+
+export const login = (req, res) => {
+  let user = new User(req.body);
+  user
+    .login()
+    .then((result) => res.send(result))
+    .catch((e) => res.send(e));
+};

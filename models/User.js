@@ -57,6 +57,24 @@ User.prototype.validate = function () {
   }
 };
 
+User.prototype.login = function () {
+  return new Promise((resolve, reject) => {
+    this.cleanUp();
+    client
+      .db()
+      .collection("users")
+      .findOne({ username: this.data.username })
+      .then((attemptedUser) => {
+        attemptedUser && attemptedUser.password === this.data.password
+          ? resolve("Congrats!!!")
+          : reject("Invalid username/password");
+      })
+      .catch(() => {
+        reject("Please, try again later.");
+      });
+  });
+};
+
 User.prototype.register = function () {
   // Step 1.- Validate incoming data
   this.cleanUp();

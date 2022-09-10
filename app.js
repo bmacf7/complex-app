@@ -1,7 +1,12 @@
 import express from "express";
-const app = express();
-
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 import router from "./router.js";
+
+dotenv.config();
+
+const app = express();
+const client = new MongoClient(process.env.MONGO_URI);
 
 // Enabling accepting data in the common ways.
 app.use(express.urlencoded({ extended: false }));
@@ -13,4 +18,8 @@ app.set("view engine", "ejs");
 
 app.use("/", router);
 
-app.listen(3000);
+client.connect().then(() => {
+  app.listen(3000);
+});
+
+export { app, client };
